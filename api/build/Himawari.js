@@ -12,6 +12,8 @@ class Himawari {
     constructor(cacheFile) {
         this.cacheFile = cacheFile;
         this.cache = JSON.parse(fs_1.default.readFileSync(path_1.default.join(cacheFile), 'utf-8'));
+        //update cache on startup
+        this.updateCache();
         //update cache every 5 minutes
         setInterval(() => {
             try {
@@ -81,9 +83,13 @@ class Himawari {
         return thumbnail;
     }
     async updateCache() {
+        console.log('checking for cache update...');
         const currentRelease = await (0, util_1.getCurrentRelease)();
-        if (currentRelease.getTime() == this.cache.release)
+        if (currentRelease.getTime() == this.cache.release) {
+            console.log('no cache update needed');
             return;
+        }
+        console.log('updating cache');
         const thumbnail = await (0, util_1.getEarth)(currentRelease, 1);
         thumbnail.toFile(this.cache.thumbnail);
         const maxRes = await (0, util_1.getEarth)(currentRelease, 20);

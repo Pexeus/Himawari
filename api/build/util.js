@@ -45,17 +45,18 @@ async function getTile(release, zoom, x, y) {
     return res.data;
 }
 function formatDate(date) {
-    const year = date.getUTCFullYear().toString();
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const day = date.getUTCDate().toString().padStart(2, '0');
-    const hour = date.getUTCHours().toString().padStart(2, '0');
-    const minute = date.getUTCMinutes().toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minute = date.getMinutes().toString().padStart(2, '0');
     return `${year}/${month}/${day}/${hour}${minute}`;
 }
 async function getCurrentRelease() {
     const agent = new https_1.default.Agent({ rejectUnauthorized: false });
-    const res = await constants_1.axios.get("https://himawari8.nict.go.jp/img/D531106/latest.json", { httpsAgent: agent });
+    const res = await constants_1.axios.get("https://himawari8-dl.nict.go.jp/himawari.asia/img/FULL_24h/latest.json", { httpsAgent: agent });
     const date = new Date(res.data.date);
+    console.log(`release: ${formatDate(date)}`);
     return date;
 }
 async function getBrightnessScore(image, area) {

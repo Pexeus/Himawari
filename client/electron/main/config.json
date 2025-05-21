@@ -1,0 +1,6 @@
+{
+    "api": "http://localhost",
+    "luminance": 50,
+    "interval": 900000,
+    "enabled": true
+}

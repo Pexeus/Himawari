@@ -1,6 +1,5 @@
 <template>
   <div class="ui">
-
     <Head></Head>
     <div class="interface">
       <div class="status card">
@@ -35,7 +34,7 @@
           <select name="luminance" id="luminance" v-model="data.config.luminance">
             <option :value="20">Dark</option>
             <option :value="50">Medium</option>
-            <option :value="150">Bright</option>
+            <option :value="100">Bright</option>
           </select>
         </div>
       </div>
@@ -129,6 +128,11 @@ async function init(config: Config) {
   width: 100px;
 }
 
+option {
+  background-color: var(--background);
+  font-size: large;
+}
+
 .preview {
   margin-left: 15px;
   margin-right: 15px;
@@ -155,6 +159,7 @@ async function init(config: Config) {
   align-items: center;
   justify-content: center;
   text-shadow: 0px 0px 15px black;
+  font-size: 14pt;
 }
 
 button {
@@ -169,6 +174,7 @@ button {
   border: 0;
   font-weight: bold;
   cursor: pointer;
+  transition: all ease-in-out .3s;
 }
 
 button:hover {

@@ -1,11 +1,15 @@
 <template>
     <div class="head">
+        <i class="gg-linear"></i>
         <p>Himawari</p>
         <div class="controls">
             <i class="gg-close"></i>
         </div>
     </div>
 </template>
+
+<script>
+</script>
 
 <style scoped>
 .head {
@@ -22,7 +26,6 @@
 }
 
 .head p {
-    margin-left: 5px;
     font-size: small;
 }
 
@@ -30,7 +33,9 @@
     margin-right: 5px;
 }
 
-img {
-    height: 100%;
+.gg-linear {
+    margin-left: 5px;
+    transform: scale(0.8);
+    color: var(--primary);
 }
 </style>

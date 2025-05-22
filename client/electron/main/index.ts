@@ -45,6 +45,8 @@ function restartDaemon() {
       if (err.code != 'ESRCH') {
         throw new Error(`Failed to kill old process: ${err}`)
       }
+
+      console.log(`No Process running with PID ${pid}`);
     }
   }
 
@@ -52,7 +54,7 @@ function restartDaemon() {
     path.join(__dirname, 'daemon.js'),
   ], {
     detached: true,
-    windowsHide: true
+    windowsHide: false
   });
 
   fs.writeFileSync(pidFile, String(daemon.pid))
@@ -85,6 +87,8 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
+    resizable: false,
+    fullscreenable: false,
     darkTheme: false,
     frame: false,
     title: 'Himawari',
@@ -102,7 +106,7 @@ async function createWindow() {
   if (VITE_DEV_SERVER_URL) { // #298
     win.loadURL(VITE_DEV_SERVER_URL)
     // Open devTool if the app is not packaged
-    win.webContents.openDevTools({mode:'undocked'})
+    //win.webContents.openDevTools({ mode: 'undocked' })
   } else {
     win.loadFile(indexHtml)
   }

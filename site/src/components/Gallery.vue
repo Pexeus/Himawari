@@ -2,8 +2,10 @@
     <div class="gallery">
         <div class="menu">
             <button>
-                <i class="gg-microsoft"></i>
-                Download
+                <div class="iconContainer">
+                    <i class="gg-microsoft"></i>
+                </div>
+                <h3>Download</h3>
             </button>
         </div>
         <div class="images">
@@ -34,18 +36,25 @@ const data = reactive({
 
 const onImageLoad = (event: Event) => {
     const img = event.target as HTMLImageElement;
-    img.classList.add('loaded');
+
+    setTimeout(() => {
+        img.classList.add('loaded');
+    }, 800 * Math.random());
 
     updatePlacement();
 };
 
 const setLuminance = (value: number) => {
     // Reset loaded classes to trigger reload animation
-    document.querySelectorAll('.images img').forEach(img => img.classList.remove('loaded'));
+    document.querySelectorAll('.images img').forEach(img => {
+        setTimeout(() => {
+            img.classList.remove('loaded')
+        }, 400 * Math.random());
+    });
 
     setTimeout(() => {
         data.luminance = value;
-    }, 500);
+    }, 1000);
 };
 
 function updatePlacement() {
@@ -80,26 +89,32 @@ window.addEventListener("resize", updatePlacement);
 
 button {
     outline: none;
-    padding: 8px;
-    color: black;
-    background-color: transparent;
-    border: 2px solid black;
-    padding-left: 25px;
-    padding-right: 40px;
-    font-size: 18pt;
-    margin: 50px;
-    border-radius: 30px;
-    transition: all ease-in-out .3s;
-    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 25px;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.315);
+    transition: ease-in-out .2s;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: black;
-    color: white;
+    box-shadow: 0px 6px 4x rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+button .iconContainer {
+    padding-top: 40px;
+}
+
+button i {
+    transform: scale(3.5);
 }
 
 .selection {

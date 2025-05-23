@@ -15,7 +15,9 @@
             </button>
         </div>
         <div class="divider">
-            <div></div>
+            <div>
+                
+            </div>
             <div class="links">
                 <a href="https://github.com/pexeus">
                     <img src="../assets/github.svg" alt="">
@@ -84,6 +86,8 @@
     max-width: 1000px;
     font-size: large;
     animation: flyIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+    opacity: 0;
 }
 
 .topLeft h1 {
@@ -126,12 +130,12 @@ button:hover {
 
 @keyframes flyIn {
     from {
-        filter: brightness(0);
+        opacity: 0;
         transform: translateY(30px);
     }
 
     to {
-        filter: brightness(1);
+        opacity: 1;
         transform: translateY(0);
     }
 }

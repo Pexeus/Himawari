@@ -50,10 +50,33 @@ async function updateWallpaper() {
     }
 }
 
-updateWallpaper()
+function startScheduler() {
+    if (!config.enabled) return;
 
-if (config.enabled) {
-    setInterval(() => {
-        updateWallpaper()
-    }, config.interval);
+    let nextExecution = Date.now() + config.interval;
+
+    const intervalId = setInterval(async () => {
+        const now = Date.now();
+        console.log(`Checking at ${new Date().toISOString()}, next execution: ${new Date(nextExecution).toISOString()}`);
+
+        if (now >= nextExecution) {
+            await updateWallpaper();
+            nextExecution = now + config.interval;
+        }
+    }, 10000);
+
+    process.on('SIGINT', () => {
+        clearInterval(intervalId);
+        console.log('Scheduler stopped on Ctrl+C');
+        process.exit(0);
+    });
+
+    process.on('SIGTERM', () => {
+        clearInterval(intervalId);
+        console.log('Scheduler cancelled');
+        process.exit(0);
+    });
 }
+
+startScheduler();
+updateWallpaper()

@@ -27,6 +27,8 @@ export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron')
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
 
+console.log(process.execPath);
+
 // Configure auto-launch for the background process
 const autoLauncher = new AutoLaunch({
   name: 'MyAppBackground',
@@ -60,10 +62,17 @@ function restartDaemon() {
   fs.writeFileSync(pidFile, String(daemon.pid))
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   nativeTheme.themeSource = 'dark'
   restartDaemon()
   createWindow()
+
+  const enabled = await autoLauncher.isEnabled()
+
+  if (!enabled) {
+    await autoLauncher.enable()
+    console.log('autolaunch enabled');
+  }
 })
 
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL

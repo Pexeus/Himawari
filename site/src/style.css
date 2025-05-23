@@ -1,5 +1,6 @@
 :root {
-  font-family: 'Montserrat', sans-serif;  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -10,6 +11,15 @@
 * {
   margin: 0;
   padding: 0;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 body {

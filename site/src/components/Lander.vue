@@ -6,18 +6,19 @@
             <p>Experience stunning, real-time Earth wallpapers from Himawari-8, crafted to fit your screen perfectly.
                 Select your preferred lighting—bright, medium, or dark—and customize updates from every 15 minutes to
                 once a day.
-                Designed for any resolution and aspect ratio. Download now and elevate your background.
+                Designed for any resolution and aspect ratio.
             </p>
-
+        </div>
+        <div class="footer">
             <button>
-                Download
+                <i class="gg-arrow-down"></i>
             </button>
         </div>
         <div class="divider">
             <div></div>
             <div class="links">
                 <a href="https://github.com/pexeus">
-                    <img src="../assets//github.svg" alt="">
+                    <img src="../assets/github.svg" alt="">
                 </a>
             </div>
         </div>
@@ -37,6 +38,16 @@
     overflow: hidden;
     position: relative;
     box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.5), -10px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.footer {
+    position: absolute;
+    bottom: 50px;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .divider {
@@ -82,14 +93,13 @@
 
 button {
     outline: none;
-    padding: 8px;
+    padding: 6px;
     color: white;
     background-color: transparent;
-    border: 2px solid white;
-    padding-left: 40px;
-    padding-right: 40px;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 15pt;
-    margin-top: 5%;
     border-radius: 30px;
     transition: all ease-in-out .3s;
     cursor: pointer;
@@ -108,6 +118,7 @@ button:hover {
     from {
         filter: brightness(0);
     }
+
     to {
         filter: brightness(1);
     }
@@ -118,6 +129,7 @@ button:hover {
         filter: brightness(0);
         transform: translateY(30px);
     }
+
     to {
         filter: brightness(1);
         transform: translateY(0);

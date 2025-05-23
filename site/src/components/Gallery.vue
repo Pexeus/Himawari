@@ -53,9 +53,16 @@ function updatePlacement() {
     const landscape = document.querySelector(".landscape") as HTMLImageElement;
     const portrait = document.querySelector(".portrait") as HTMLImageElement;
     const ultrawide = document.querySelector(".ultrawide") as HTMLImageElement;
+    const container = document.querySelector(".images") as HTMLImageElement;
     const offset = Math.max(landscape.width + portrait.width + 20, ultrawide.width);
-    console.log(`UW: ${ultrawide.width} \n LN: ${landscape.width + portrait.width + 20}`);
-    p2.style.left = `${offset + 30}px`;
+
+    if (offset * 1.25 > container.getBoundingClientRect().width) {
+        p2.style.display = 'none'
+    }
+    else {
+        p2.style.display = 'inline-block'
+        p2.style.left = `${offset + 30}px`;
+    }
 }
 
 window.addEventListener("resize", updatePlacement);
@@ -142,6 +149,7 @@ button:hover {
     filter: brightness(0);
     /* Hide image content while loading */
     animation: fadeOut .5s ease-in-out forwards;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .images img.loaded {
